@@ -6,7 +6,7 @@ import 'package:flutter_ecommerce_app/src/themes/theme.dart';
 import 'package:flutter_ecommerce_app/src/widgets/title_text.dart';
 
 class ShoppingCartPage extends StatelessWidget {
-  const ShoppingCartPage({Key key}) : super(key: key);
+  const ShoppingCartPage({Key? key}) : super(key: key);
 
   Widget _cartItems() {
     return Column(children: AppData.cartList.map((x) => _item(x)).toList());
@@ -43,7 +43,7 @@ class ShoppingCartPage extends StatelessWidget {
                 Positioned(
                   left: -20,
                   bottom: -20,
-                  child: Image.asset(model.image),
+                  child: Image.asset(model.image ?? ''),
                 )
               ],
             ),
@@ -51,7 +51,7 @@ class ShoppingCartPage extends StatelessWidget {
           Expanded(
               child: ListTile(
                   title: TitleText(
-                    text: model.name,
+                    text: model.name ?? '',
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
                   ),
@@ -104,27 +104,33 @@ class ShoppingCartPage extends StatelessWidget {
   }
 
   Widget _submitButton(BuildContext context) {
-    return FlatButton(
-        onPressed: () {},
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: LightColor.orange,
-        child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: 12),
-          width: AppTheme.fullWidth(context) * .7,
-          child: TitleText(
-            text: 'Next',
-            color: LightColor.background,
-            fontWeight: FontWeight.w500,
-          ),
-        ));
+        backgroundColor: LightColor.orange,
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 12),
+        width: AppTheme.fullWidth(context) * .7,
+        child: TitleText(
+          text: 'Selanjutnya',
+          color: LightColor.background,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
   }
 
   double getPrice() {
     double price = 0;
+
     AppData.cartList.forEach((x) {
-      price += x.price * x.id;
+      // Ganti '1' dengan nilai default jika diperlukan
+      price += (x.price ?? 0) * (x.id ?? 1);
     });
+
     return price;
   }
 

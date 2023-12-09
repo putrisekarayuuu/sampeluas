@@ -5,7 +5,7 @@ import 'package:flutter_ecommerce_app/src/pages/product_detail.dart';
 class Routes{
   static Map<String,WidgetBuilder> getRoute(){
     return  <String, WidgetBuilder>{
-          '/': (_) => MainPage(),
+          '/': (_) => MainPage(title: '',),
           // '/detail': (_) => ProductDetailPage()
         };
   }

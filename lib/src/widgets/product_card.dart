@@ -8,7 +8,7 @@ import 'package:flutter_ecommerce_app/src/widgets/extentions.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final ValueChanged<Product> onSelected;
-  ProductCard({Key key, this.product, this.onSelected}) : super(key: key);
+  ProductCard({Key? key, required this.product, required this.onSelected}) : super(key: key);
 
 //   @override
 //   _ProductCardState createState() => _ProductCardState();
@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
           BoxShadow(color: Color(0xfff8f8f8), blurRadius: 15, spreadRadius: 10),
         ],
       ),
-      margin: EdgeInsets.symmetric(vertical: !product.isSelected ? 20 : 0),
+      margin: EdgeInsets.symmetric(vertical: product.isSelected ?? false ? 20 : 0),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Stack(
@@ -43,9 +43,9 @@ class ProductCard extends StatelessWidget {
               top: 0,
               child: IconButton(
                 icon: Icon(
-                  product.isliked ? Icons.favorite : Icons.favorite_border,
+                  product.isliked ?? false ? Icons.favorite : Icons.favorite_border,
                   color:
-                      product.isliked ? LightColor.red : LightColor.iconColor,
+                      product.isliked ?? false ? LightColor.red : LightColor.iconColor,
                 ),
                 onPressed: () {},
               ),
@@ -54,7 +54,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                SizedBox(height: product.isSelected ? 15 : 0),
+                SizedBox(height: product.isSelected ?? false ? 15 : 0),
                 Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
@@ -62,22 +62,22 @@ class ProductCard extends StatelessWidget {
                       radius: 40,
                       backgroundColor: LightColor.orange.withAlpha(40),
                     ),
-                    Image.asset(product.image)
+                    Image.asset(product.image!)
                   ],
                 ),
                 // SizedBox(height: 5),
                 TitleText(
-                  text: product.name,
-                  fontSize: product.isSelected ? 16 : 14,
+                  text: product.name ?? '',
+                  fontSize: product.isSelected ?? false ? 16 : 14,
                 ),
                 TitleText(
-                  text: product.category,
-                  fontSize: product.isSelected ? 14 : 12,
+                  text: product.category ?? '',
+                  fontSize: product.isSelected ?? false ? 14 : 12,
                   color: LightColor.orange,
                 ),
                 TitleText(
                   text: product.price.toString(),
-                  fontSize: product.isSelected ? 18 : 16,
+                  fontSize: product.isSelected ?? false ? 18 : 16,
                 ),
               ],
             ),

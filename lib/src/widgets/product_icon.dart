@@ -10,7 +10,8 @@ class ProductIcon extends StatelessWidget {
   // final String text;
   final ValueChanged<Category> onSelected;
   final Category model;
-  ProductIcon({Key key, this.model, this.onSelected}) : super(key: key);
+  ProductIcon({Key? key, required this.model, required this.onSelected})
+      : super(key: key);
 
   Widget build(BuildContext context) {
     return model.id == null
@@ -22,16 +23,16 @@ class ProductIcon extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: model.isSelected
+                color: model.isSelected ?? false
                     ? LightColor.background
                     : Colors.transparent,
                 border: Border.all(
-                  color: model.isSelected ? LightColor.orange : LightColor.grey,
-                  width: model.isSelected ? 2 : 1,
+                  color: model.isSelected ?? false ? LightColor.orange : LightColor.grey,
+                  width: model.isSelected ?? false ? 2 : 1,
                 ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: model.isSelected ? Color(0xfffbf2ef) : Colors.white,
+                    color: model.isSelected ?? false ? Color(0xfffbf2ef) : Colors.white,
                     blurRadius: 10,
                     spreadRadius: 5,
                     offset: Offset(5, 5),
@@ -40,12 +41,12 @@ class ProductIcon extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  model.image != null ? Image.asset(model.image) : SizedBox(),
+                  model.image != null ? Image.asset(model.image!) : SizedBox(),
                   model.name == null
                       ? Container()
                       : Container(
                           child: TitleText(
-                            text: model.name,
+                            text: model.name!,
                             fontWeight: FontWeight.w700,
                             fontSize: 15,
                           ),

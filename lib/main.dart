@@ -15,19 +15,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'E-Commerce ',
       theme: AppTheme.lightTheme.copyWith(
-        textTheme: GoogleFonts.muliTextTheme(
+        textTheme: GoogleFonts.mulishTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
       debugShowCheckedModeBanner: false,
       routes: Routes.getRoute(),
       onGenerateRoute: (RouteSettings settings) {
-        if (settings.name.contains('detail')) {
+        if (settings.name != null && settings.name!.contains('detail')) {
           return CustomRoute<bool>(
               builder: (BuildContext context) => ProductDetailPage());
         } else {
           return CustomRoute<bool>(
-              builder: (BuildContext context) => MainPage());
+              builder: (BuildContext context) => MainPage(title: '',));
         }
       },
       initialRoute: "MainPage",
